@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body{
+            background-color: #262322;
+            margin: 3em;
+        }
+        .font{
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 2em;
+        }
+        .important1{
+            color: #C41E3D;
+            font-weight: 800;
+        }
+        .important2{
+            color: #C41E3D;
+            font-weight: 500;
+        }
+        .linkBack{
+            color: #E2D4BA;
+            text-decoration: none;
+            font-size: 2em;
+        }
+        .accordion {
+            background-color: #C9A794;
+            color: #262322;
+            cursor: pointer;
+            padding: 18px;
+            width: 100%;
+            text-align: left;
+            border: none;
+            outline: none;
+            transition: 0.4s;
+        }
+        .active, .accordion:hover {
+            background-color: #E2D4BA;
+        }
+        .panel {
+            padding: 0 18px;
+            background-color: #E2D4BA;
+            display: none;
+            overflow: hidden;
+        }
+    </style>
+    <title>How to get your Data</title>
+</head>
+<body>
+    <a href="index.html" class="linkBack">← Back to the Starting page</a>
+    <div>
+        <button class="accordion font">What happens with my data?</button>
+        <div class="panel font">
+        <p>No Data will be saved on any server. The complete analysing process happens locally on your device!</p>
+        </div>
+        
+        <button class="accordion font">How to get my data?</button>
+        <div class="panel font">
+        <p>To get your data you can follow the steps on <a href="https://support.tiktok.com/en/account-and-privacy/personalized-ads-and-data/requesting-your-data">this</a> page. <span class="important1">IMPORTANT: </span><span class="important2">Make sure to select the file format "JSON" on the bottom of the page! Otherwise the page can't work.</span><br> After sending the request it normally takes 1-2 days till you can download the zip file. Save the file on your device. After you saved the file you can go to the starting page, click on "Already got your data?" and upload the <u>zip file</u>.</p>
+        </div>
+    </div>    
+    <script src="js/main.js"></script>
+</body>
+</html>
