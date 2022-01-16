@@ -2,10 +2,6 @@ function showDataUploader(){
     document.getElementById("uploadDiv").style.visibility="visible";
 }
 
-function helpData(){
-    window.open("https://support.tiktok.com/en/account-and-privacy/personalized-ads-and-data/requesting-your-data")
-}
-
 var acc = document.getElementsByClassName("accordion");
 var i;
 
