@@ -5,65 +5,96 @@ function countUp(){
     counter.forEach(counter =>{
         const updateCount = () => {
             const target = +counter.getAttribute("data-target");
-            const count = +counter.innerText;
+            const count = dict[target];
 
             var inc = target / speed;
 
-            if(count < target){
-                counter.innerText = Math.ceil(count + inc);
+            var newInc = count + inc;
+            if (newInc < 1) {
+                newInc *= 10;
+            }
+                
+            dict[target] = newInc;
+
+            if(count < target && newInc <= target){
+                counter.innerText = Math.trunc(newInc);
                 setTimeout(updateCount, 10);
-            } else {
-                count.innerText = target;
+            }
+            
+            if(newInc > target){
+                counter.innerText = target;
             }
         }
         updateCount();
     });
+} 
+
+
+function getData(fileType, data){
+    if(fileType === "txt"){
+        return (data.match(/Date/g) || []).length;
+    } else {
+
+    }
 }
 
-// var displayresult = document.getElementById("displayresult");
 const fileSelector = document.getElementById('file-selector');
+let dict = {};
+
 fileSelector.addEventListener('change', (event) => {
     document.getElementById("viewData").style.visibility="visible";
     const file = event.target.files[0];
-    document.getElementById("dataDate").innerText=new Intl.DateTimeFormat('en-US').format(file.lastModifiedDate);
 
     const reader = new zip.ZipReader(new zip.BlobReader(file));
     const entries = reader.getEntries();
 
-    entries.then(function(result){
-        const follower = result[4].getData(new zip.TextWriter());
-        const following = result[5].getData(new zip.TextWriter());
-        const likes = result[7].getData(new zip.TextWriter());
-        const searches = result[10].getData(new zip.TextWriter());
-        const watchedVideos = result[13].getData(new zip.TextWriter());
-        const comments = result[19].getData(new zip.TextWriter());
+    await entries.then(function(result){
+        const userFileType = result[0].filename.slice(-3);
 
-        follower.then(function(data){
-            document.getElementById("followerElem").setAttribute("data-target", (data.match(/Date/g) || []).length);
-        })
-        following.then(function(data){
-            document.getElementById("followingElem").setAttribute("data-target", (data.match(/Date/g) || []).length);
-        })
-        likes.then(function(data){
-            document.getElementById("likesElem").setAttribute("data-target", (data.match(/Date/g) || []).length);
-        })
-        searches.then(function(data){
-            document.getElementById("searchesElem").setAttribute("data-target", (data.match(/Date/g) || []).length);
-        })
-        comments.then(function(data){
-            document.getElementById("commentsElem").setAttribute("data-target", (data.match(/Date/g) || []).length);
-        })
-        watchedVideos.then(function(data){
-            document.getElementById("watchedVideosElem").setAttribute("data-target", (data.match(/Date/g) || []).length);
-            countUp();
-        })
-        
-
+        const follower = result[4].getData(new zip.TextWriter()).then(
+            function(data){
+                let target = getData(userFileType, data);
+                dict[target] = 0;
+                document.getElementById("followerElem").setAttribute("data-target", target);
+            }
+        );
+        const following = result[5].getData(new zip.TextWriter()).then(
+            function(data){
+                let target = getData(userFileType, data);
+                dict[target] = 0
+                document.getElementById("followingElem").setAttribute("data-target", target);
+            }
+        );
+        const likes = result[7].getData(new zip.TextWriter()).then(
+            function(data){
+                let target = getData(userFileType, data);
+                dict[target] = 0
+                document.getElementById("likesElem").setAttribute("data-target", target);
+            }
+        );
+        const searches = result[10].getData(new zip.TextWriter()).then(
+            function(data){
+                let target = getData(userFileType, data);
+                dict[target] = 0
+                document.getElementById("searchesElem").setAttribute("data-target", target);
+            }
+        );
+        const watchedVideos = result[13].getData(new zip.TextWriter()).then(
+            function(data){
+                let target = getData(userFileType, data);
+                dict[target] = 0
+                document.getElementById("watchedVideosElem").setAttribute("data-target", target);
+                countUp();
+            }
+        );
+        const comments = result[19].getData(new zip.TextWriter()).then(
+            function(data){
+                let target = getData(userFileType, data);
+                dict[target] = 0
+                document.getElementById("commentsElem").setAttribute("data-target", target);
+            }
+        );
     });
 
-    console.log(entries)
-
-    // close the ZipReader
     reader.close();
-    
 });
