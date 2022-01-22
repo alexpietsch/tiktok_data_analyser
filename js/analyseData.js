@@ -119,44 +119,6 @@ fileSelector.addEventListener('change', (event) => {
                     countUp();
                 }
             );
-
-            
-            /* const following = result[5].getData(new zip.TextWriter()).then(
-                function(data){
-                    let target = getData(userFileType, data);
-                    dict[target] = 0
-                    document.getElementById("followingElem").setAttribute("data-target", target);
-                }
-            );
-            const likes = result[7].getData(new zip.TextWriter()).then(
-                function(data){
-                    let target = getData(userFileType, data);
-                    dict[target] = 0
-                    document.getElementById("likesElem").setAttribute("data-target", target);
-                }
-            );
-            const searches = result[10].getData(new zip.TextWriter()).then(
-                function(data){
-                    let target = getData(userFileType, data);
-                    dict[target] = 0
-                    document.getElementById("searchesElem").setAttribute("data-target", target);
-                }
-            );
-            const watchedVideos = result[13].getData(new zip.TextWriter()).then(
-                function(data){
-                    let target = getData(userFileType, data);
-                    dict[target] = 0
-                    document.getElementById("watchedVideosElem").setAttribute("data-target", target);
-                    countUp();
-                }
-            );
-            const comments = result[19].getData(new zip.TextWriter()).then(
-                function(data){
-                    let target = getData(userFileType, data);
-                    dict[target] = 0
-                    document.getElementById("commentsElem").setAttribute("data-target", target);
-                }
-            ); */
         }
         
     });
